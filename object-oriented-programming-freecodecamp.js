@@ -112,4 +112,98 @@ function Dog3(name) {
   
   // Add your code above this line
   let beagle = new Dog3("Snoopy");
-  console.log(beagle.numLegs)
+  console.log(beagle.numLegs);
+
+// 11. Iterate Over All Properties
+
+function Dog4(name) {
+    this.name = name;
+  }
+  
+  Dog4.prototype.numLegs = 4;
+  
+  let beagle1 = new Dog4("Snoopy");
+  
+  let ownProps1 = [];
+  let prototypeProps1 = [];
+  
+  // Add your code below this line 
+  for (let property in beagle1) {
+    //   console.log(beagle1.hasOwnProperty(property))
+      if(beagle1.hasOwnProperty(property)) {
+          ownProps1.push(property);
+      } else {
+        prototypeProps1.push(property);
+    }
+  }
+
+  console.log(ownProps1);
+  console.log(prototypeProps1);
+
+// 12. Understand the Consctructor Property
+
+function Dog5(name) {
+    this.name = name;
+  }
+  
+  // Add your code below this line
+  function joinDogFraternity(candidate) {
+    if(candidate.constructor === Dog5) {
+        return true;
+    } else {
+        return false;
+    }
+  };
+
+//   13. Change the Prototype to a New Object
+
+function Dog6(name) {
+    this.name = name; 
+  }
+  
+  Dog6.prototype = {
+    // Add your code below this line
+    numLegs: 4,
+    eat: function() {
+        return 'EAT'
+    },
+    describe: function() {
+        return 'Describe'
+    }
+
+  };
+
+// 14. Remember to Set the Constructor Property when Changing the Protoype
+
+function Dog7(name) {
+    this.name = name; 
+  }
+  
+  // Modify the code below this line
+  Dog7.prototype = {
+    constructor: Dog7, // This line is what was added to set the constructor to the Dog type
+    numLegs: 2, 
+    eat: function() {
+      console.log("nom nom nom"); 
+    }, 
+    describe: function() {
+      console.log("My name is " + this.name); 
+    }
+  };
+
+// 15. Understand Where an Objects Prototype Comes from
+
+function Dog8(name) {
+    this.name = name;
+  }
+  
+  let beagle2 = new Dog8("Snoopy");
+  
+  // Add your code below this line
+  console.log(Dog8.prototype.isPrototypeOf(beagle2));
+
+
+
+
+  
+  
