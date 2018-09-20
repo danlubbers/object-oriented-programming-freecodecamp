@@ -320,3 +320,86 @@ let beagle7 = new Dog();
 
 console.log(beagle7.eat()); // Should print "nom nom nom"
 console.log(beagle7.bark()); // Should print "Woof!"
+
+// 22. Override Inherited Methods
+
+function Bird() { }
+
+Bird.prototype.fly = function() { return "I am flying!"; };
+
+function Penguin() { }
+Penguin.prototype = Object.create(Bird.prototype);
+Penguin.prototype.constructor = Penguin;
+
+// Add your code below this line
+
+Penguin.prototype.fly = function() {
+    return 'Alas, this is a flightless bird.';
+}
+
+// Add your code above this line
+
+let penguin = new Penguin();
+console.log(penguin.fly());
+
+// 23. Use a Mixin to Add Common Behavor Beteween Unrelated Objects
+
+let bird = {
+    name: "Donald",
+    numLegs: 2
+  };
+  
+  let boat = {
+    name: "Warrior",
+    type: "race-boat"
+  };
+  
+  // Add your code below this line
+  
+  let glideMixin = function(obj) {
+      obj.glide = function() {}
+  }
+  
+  glideMixin(bird);
+  glideMixin(boat);
+
+  console.log(bird.glide());
+  console.log(boat.glide());
+  
+// 24. Use Closure to Protect Properties Within an Object from Being Modified Externally
+
+function Bird() {
+    let weight = 15; // Changes this.weight to a variable the create method below 
+    
+    // Method makes sure the weight variable is a private variable
+    this.getWeight = function() {
+        return weight;
+    };
+  }
+  let woodpecker = new Bird;
+  console.log(woodpecker.getWeight());
+  
+// 25. Understand the Immediately Invoked Function Expression (IIFE)
+
+(function () {
+    console.log("A cozy nest is ready");
+  })();
+  
+// 26. Use an IIFE to Create a Module
+
+let funModule = (function() {
+    return {
+        isCuteMixin: function(obj) {
+            obj.isCute = function() {
+              return true;
+            };
+          },
+          singMixin: function(obj) {
+            obj.sing = function() {
+              console.log("Singing to an awesome tune");
+            };
+          }
+    }
+}) ();
+
+console.log(funModule);
