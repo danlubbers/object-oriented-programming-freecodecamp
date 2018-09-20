@@ -202,8 +202,121 @@ function Dog8(name) {
   // Add your code below this line
   console.log(Dog8.prototype.isPrototypeOf(beagle2));
 
+// 16. Understand the Prototype Chain
 
-
-
+function Dog9(name) {
+    this.name = name;
+  }
   
+  let beagle3 = new Dog9("Snoopy");
   
+  Dog9.prototype.isPrototypeOf(beagle3);  // => true
+  
+  // Fix the code below so that it evaluates to true
+  console.log(Object.prototype.isPrototypeOf(Dog9.prototype));
+  
+// 17. Use Inheritance So You Don't Repeat Yourself
+
+function Cat(name) {
+    this.name = name; 
+  }
+  
+  Cat.prototype = {
+    constructor: Cat, 
+  };
+  
+  function Bear(name) {
+    this.name = name; 
+  }
+  
+  Bear.prototype = {
+    constructor: Bear, 
+  };
+  
+  function Animal() { }
+  
+  Animal.prototype = {
+    constructor: Animal,
+    eat: function() {
+      console.log("nom nom nom");
+    }
+  };
+
+// 18. Inherit Behaviors from a Supertype
+
+function Animal() { }
+
+Animal.prototype = {
+  constructor: Animal, 
+  eat: function() {
+    console.log("nom nom nom");
+  }
+};
+
+// Add your code below this line
+
+let duck3 = Object.create(Animal.prototype); // Change this line
+let beagle4 = Object.create(Animal.prototype); // Change this line
+
+console.log(duck3.eat()); // Should print "nom nom nom"
+beagle4.eat(); // Should print "nom nom nom" 
+
+// 19. Set the Child's Prototype to an Instance of the Parent
+
+function Animal() { }
+
+Animal.prototype = {
+  constructor: Animal,
+  eat: function() {
+    console.log("nom nom nom");
+  }
+};
+
+function Dog10() { }
+
+// Add your code below this line
+Dog10.prototype = Object.create(Animal.prototype);
+
+let beagle5 = new Dog10();
+console.log(beagle5.eat());  // Should print "nom nom nom"
+
+// 20. Reset an Inherited Constructor Property
+
+function Animal() { }
+function Bird() { }
+function Dog() { }
+
+Bird.prototype = Object.create(Animal.prototype);
+Dog.prototype = Object.create(Animal.prototype);
+
+// Add your code below this line
+
+Bird.prototype.constructor = Bird;
+Dog.prototype.constructor = Dog;
+
+let duck = new Bird();
+let beagle6 = new Dog();
+console.log(duck);
+console.log(beagle6);
+
+// 21. Add Methods After Inheritance
+
+function Animal() { }
+Animal.prototype.eat = function() { console.log("nom nom nom"); };
+
+function Dog() { }
+
+// Add your code below this line
+Dog.prototype = Object.create(Animal.prototype)
+Dog.prototype.constructor = Dog;
+Dog.prototype.bark = function() {
+    console.log("Woof!");
+}
+
+
+// Add your code above this line
+
+let beagle7 = new Dog();
+
+console.log(beagle7.eat()); // Should print "nom nom nom"
+console.log(beagle7.bark()); // Should print "Woof!"
